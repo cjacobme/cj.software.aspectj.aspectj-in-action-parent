@@ -46,6 +46,7 @@
 	</dependencyManagement>
 	<modules>
 		<module>ch02-introducing</module>
+		<module>ch03-joinpoint-model</module>
 	</modules>
 	<build>
 		<pluginManagement>

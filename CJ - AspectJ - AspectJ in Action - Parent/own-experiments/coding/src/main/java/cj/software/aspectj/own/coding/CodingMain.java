@@ -23,4 +23,13 @@ public class CodingMain
 		logger.info("persons %d", persons.size());
 	}
 
+	public static void setAnnotatedPersons(List<Person> source)
+	{
+		annotatedPersons = source;
+	}
+
+	public static void setPersons(List<Person> source)
+	{
+		persons = source;
+	}
 }

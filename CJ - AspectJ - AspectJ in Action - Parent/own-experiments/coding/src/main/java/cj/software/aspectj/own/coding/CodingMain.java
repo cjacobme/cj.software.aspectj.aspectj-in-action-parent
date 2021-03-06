@@ -1,6 +1,5 @@
 package cj.software.aspectj.own.coding;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,4 @@ public class CodingMain
 		logger.info("persons %d", persons.size());
 	}
 
-	public void protocol(LocalDate ld, List<Person> persons, String abc)
-	{
-	}
 }

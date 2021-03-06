@@ -8,12 +8,6 @@ public aspect Coding
 	
 	pointcut listOfComparable() : set(java.util.List<java.lang.Comparable+> *);
 	
-	pointcut listAsParameter(): execution( * *.*(.., java.util.List, ..));
-	
-	declare warning
-		: listAsParameter() && !within(Coding) && ! listOfComparable()
-		: "java.util.List as parameter";
-	
 	declare warning
 		: listUsage() && !within(Coding) && ! listOfComparable()
 		: "possibly improper use of java.util.List";

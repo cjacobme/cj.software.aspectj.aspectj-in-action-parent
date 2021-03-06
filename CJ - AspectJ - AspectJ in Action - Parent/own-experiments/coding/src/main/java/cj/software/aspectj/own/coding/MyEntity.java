@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OrderBy;
 
 @Entity
-public class Bookstore
+public class MyEntity
 {
 	@OrderBy("name")
 	private List<Person> persons = new ArrayList<>();

@@ -47,6 +47,7 @@
 	<modules>
 		<module>ch02-introducing</module>
 		<module>ch03-joinpoint-model</module>
+		<module>own-experiments</module>
 	</modules>
 	<build>
 		<pluginManagement>

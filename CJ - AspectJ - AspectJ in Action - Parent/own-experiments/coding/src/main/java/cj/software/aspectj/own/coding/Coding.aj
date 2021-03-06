@@ -2,6 +2,8 @@ package cj.software.aspectj.own.coding;
 
 public aspect Coding 
 {
+	pointcut systemout() : get(java.io.PrintStream System.out);
+	
 	pointcut listUsage() : set(!@ListUsageOk java.util.List *);
 	
 	pointcut listOfComparable() : set(java.util.List<java.lang.Comparable+> *);
@@ -17,7 +19,7 @@ public aspect Coding
 		: "possibly improper use of java.util.List";
 	
 	declare error
-		: get(java.io.PrintStream System.out) && within(cj.software..*..*)
+		: systemout()
 		: "illegal access to System.out";
 	
 }

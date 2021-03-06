@@ -26,6 +26,5 @@ public class CodingMain
 
 	public void protocol(LocalDate ld, List<Person> persons, String abc)
 	{
-
 	}
 }

@@ -21,6 +21,7 @@ public class PersonService
 	{
 		List<Person> result = this.dao.listPersons();
 		doNothing();
+		toUpper("asdf");
 		return result;
 	}
 
@@ -28,5 +29,11 @@ public class PersonService
 	public void doNothing()
 	{
 
+	}
+
+	@Trace
+	public String toUpper(String source)
+	{
+		return source.toUpperCase();
 	}
 }

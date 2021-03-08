@@ -2,6 +2,7 @@ package cj.software.aspectj.own.tracing.aspect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,17 @@ public aspect TraceAspect
 		String methodName = signature.getName();
 		if (result != null)
 		{
-			logger.info("%s returned %s", methodName, result);
+			if (result instanceof Collection)
+			{
+				Collection<?> collection = (Collection<?>)result;
+				int size = collection.size();
+				String className = collection.getClass().getSimpleName();
+				logger.info("%s returned %s with %d entries", methodName, className, size);
+			}
+			else
+			{
+				logger.info("%s returned %s", methodName, result);
+			}
 		}
 		else
 		{

@@ -20,6 +20,13 @@ public class PersonService
 	public List<Person> listPersons(@NoTrace String searchName, String searchSurname)
 	{
 		List<Person> result = this.dao.listPersons();
+		doNothing();
 		return result;
+	}
+
+	@Trace
+	public void doNothing()
+	{
+
 	}
 }

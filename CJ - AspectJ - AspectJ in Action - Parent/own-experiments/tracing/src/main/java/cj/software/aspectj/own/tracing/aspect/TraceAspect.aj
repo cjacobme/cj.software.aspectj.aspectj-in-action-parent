@@ -11,6 +11,21 @@ public aspect TraceAspect
 {
 	private pointcut trace() : execution(@Trace  * *.*(..));
 	
+	after() returning(Object result) : trace() 
+	{
+		Logger logger = LogManager.getFormatterLogger(thisJoinPoint.getTarget().getClass());
+		MethodSignature signature = (MethodSignature)thisJoinPoint.getSignature();
+		String methodName = signature.getName();
+		if (result != null)
+		{
+			logger.info("%s returned %s", methodName, result);
+		}
+		else
+		{
+			logger.info("%s returned nothing", methodName);
+		}
+	}
+	
 	before() : trace() 
 	{
 		Logger logger = LogManager.getFormatterLogger(thisJoinPoint.getTarget().getClass());

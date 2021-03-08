@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import cj.software.aspectj.own.tracing.aspect.Trace;
 import cj.software.aspectj.own.tracing.entity.Person;
 
 public class PersonDAO
@@ -42,6 +43,7 @@ public class PersonDAO
 		put(this.persons, person);
 	}
 
+	@Trace
 	public List<Person> listPersons()
 	{
 		List<Person> result = new ArrayList<>();

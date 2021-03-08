@@ -10,5 +10,6 @@
   <name>Own Experiments</name>
   <modules>
   	<module>coding</module>
+  	<module>tracing</module>
   </modules>
 </project>

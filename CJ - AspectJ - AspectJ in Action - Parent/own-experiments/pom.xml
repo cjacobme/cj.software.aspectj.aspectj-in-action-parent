@@ -11,5 +11,6 @@
   <modules>
   	<module>coding</module>
   	<module>tracing</module>
+  	<module>cflow</module>
   </modules>
 </project>

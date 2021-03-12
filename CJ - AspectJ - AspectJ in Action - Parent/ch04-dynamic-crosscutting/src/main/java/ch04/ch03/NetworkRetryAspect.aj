@@ -2,6 +2,9 @@ package ch04.ch03;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.reflect.MethodSignature;
+
+import java.lang.reflect.Method;
 import java.nio.channels.UnresolvedAddressException;
 
 public aspect NetworkRetryAspect 
@@ -12,8 +15,13 @@ public aspect NetworkRetryAspect
 	
 	Object around() : networkRetry() 
 	{
+		MethodSignature methodSignature = (MethodSignature)thisJoinPoint.getSignature();
+		Method method = methodSignature.getMethod();
+		NetworkRetries networkRetries = method.getAnnotation(NetworkRetries.class);
+		int numTries = networkRetries.numTries();
 		UnresolvedAddressException first = null;
-		for (int i = 0; i < 3; i++)
+		logger.info("totally %d tries...", numTries);
+		for (int i = 0; i < numTries; i++)
 		{
 			try
 			{

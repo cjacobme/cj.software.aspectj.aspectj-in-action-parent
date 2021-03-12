@@ -61,6 +61,7 @@
 		<module>ch02-introducing</module>
 		<module>ch03-joinpoint-model</module>
 		<module>own-experiments</module>
+		<module>ch04-dynamic-crosscutting</module>
 	</modules>
 	<build>
 		<pluginManagement>

@@ -8,8 +8,8 @@
 		<artifactId>own-experiments</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>coding</artifactId>
-	<name>Own Experiments - Coding</name>
+	<artifactId>01-coding</artifactId>
+	<name>01 Own Experiments - Coding</name>
 
 	<dependencies>
 		<dependency>

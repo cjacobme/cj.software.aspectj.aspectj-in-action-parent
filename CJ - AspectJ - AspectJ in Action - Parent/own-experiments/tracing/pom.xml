@@ -9,8 +9,8 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>tracing</artifactId>
-	<name>Own Experiments - Tracing</name>
+	<artifactId>02-tracing</artifactId>
+	<name>02 Own Experiments - Tracing</name>
 	<description>Tracing with configurable List of Parameters</description>
 
 	<dependencies>

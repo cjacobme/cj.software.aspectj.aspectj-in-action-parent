@@ -8,9 +8,9 @@
 		<artifactId>own-experiments</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>cflow</artifactId>
+	<artifactId>03-cflow</artifactId>
 
-	<name>Own Experiments - Cflow</name>
+	<name>03 Own Experiments - Cflow</name>
 	<description>find something out about cflow</description>
 
 	<dependencies>

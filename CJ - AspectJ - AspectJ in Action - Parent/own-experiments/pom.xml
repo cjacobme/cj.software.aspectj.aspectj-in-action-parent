@@ -12,5 +12,6 @@
   	<module>coding</module>
   	<module>tracing</module>
   	<module>cflow</module>
+  	<module>04-camunda</module>
   </modules>
 </project>

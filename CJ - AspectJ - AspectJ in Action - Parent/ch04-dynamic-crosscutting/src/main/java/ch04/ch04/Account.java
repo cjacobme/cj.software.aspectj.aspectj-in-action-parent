@@ -9,6 +9,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Account
 {
+	/**
+	 * the id :-)
+	 */
 	private UUID id;
 
 	private double balance;

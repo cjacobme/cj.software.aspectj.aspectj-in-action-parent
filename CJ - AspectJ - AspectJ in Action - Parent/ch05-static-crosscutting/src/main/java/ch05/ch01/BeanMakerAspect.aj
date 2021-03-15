@@ -9,33 +9,33 @@ import org.apache.commons.beanutils.BeanUtils;
 
 public aspect BeanMakerAspect
 {
-	private PropertyChangeSupport Customer.propertyChangeSupport;
+	private PropertyChangeSupport BeanSupport.propertyChangeSupport;
 	
-	public void Customer.addPropertyChangeListener (PropertyChangeListener listener)
+	public void BeanSupport.addPropertyChangeListener (PropertyChangeListener listener)
 	{
 		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
 	
-	public void Customer.removePropertyChangeListener (PropertyChangeListener listener)
+	public void BeanSupport.removePropertyChangeListener (PropertyChangeListener listener)
 	{
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}
 	
-	pointcut beanCreation (Customer bean) 
-	: initialization( Customer+.new(..)) 
+	pointcut beanCreation (BeanSupport bean) 
+	: initialization( BeanSupport+.new(..)) 
 	&& this(bean);
 	
-	pointcut beanPropertyChange (Customer bean, Object newValue)
-	: execution( void Customer+.set*(*))
+	pointcut beanPropertyChange (BeanSupport bean, Object newValue)
+	: execution( void BeanSupport+.set*(*))
 	&& args(newValue)
 	&& this(bean);
 	
-	after(Customer bean) returning() : beanCreation(bean) 
+	after(BeanSupport bean) returning() : beanCreation(bean) 
 	{
 		bean.propertyChangeSupport = new PropertyChangeSupport(bean);
 	}
 	
-	void around(Customer bean, Object newValue)
+	void around(BeanSupport bean, Object newValue)
 	: beanPropertyChange(bean, newValue)
 	{
 		String methodName = thisJoinPoint.getSignature().getName();

@@ -86,6 +86,7 @@
 		<module>own-experiments</module>
 		<module>ch04-dynamic-crosscutting</module>
 		<module>ch05-static-crosscutting</module>
+		<module>ch06-aspects</module>
 	</modules>
 	<build>
 		<pluginManagement>

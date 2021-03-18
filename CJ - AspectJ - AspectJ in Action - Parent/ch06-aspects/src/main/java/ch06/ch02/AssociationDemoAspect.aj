@@ -3,7 +3,7 @@ package ch06.ch02;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public aspect AssociationDemoAspect
+public aspect AssociationDemoAspect perthis(accountOperationExecution(Account))
 {
 	private Logger logger = LogManager.getFormatterLogger();
 	

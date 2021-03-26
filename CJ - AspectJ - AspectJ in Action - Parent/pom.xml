@@ -87,6 +87,7 @@
 		<module>ch04-dynamic-crosscutting</module>
 		<module>ch05-static-crosscutting</module>
 		<module>ch06-aspects</module>
+		<module>ch07-at-aspectj</module>
 	</modules>
 	<build>
 		<pluginManagement>

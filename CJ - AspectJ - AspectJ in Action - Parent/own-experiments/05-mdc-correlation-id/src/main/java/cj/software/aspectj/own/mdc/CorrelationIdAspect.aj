@@ -17,9 +17,6 @@ public aspect CorrelationIdAspect
 	: execution( * *.*(Contract, ..))
 	&& args(contract, ..);
 	
-	private pointcut toBeEmbedded(Contract contract) 
-	: hasLogger() && notPrivateMethod() && methodWithContract(contract);
-	
 	Object around(Contract contract) : methodWithContract(contract) && notPrivateMethod()
 	{
 		String oldCorrelationId = MDC.get(Constants.CORRELATION_ID);

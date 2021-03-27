@@ -13,5 +13,6 @@
   	<module>tracing</module>
   	<module>cflow</module>
   	<module>04-camunda</module>
+  	<module>05-mdc-correlation-id</module>
   </modules>
 </project>

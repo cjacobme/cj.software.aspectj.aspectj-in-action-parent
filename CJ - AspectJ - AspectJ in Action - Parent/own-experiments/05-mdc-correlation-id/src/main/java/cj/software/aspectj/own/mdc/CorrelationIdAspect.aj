@@ -14,8 +14,8 @@ public aspect CorrelationIdAspect
 	: execution(!private * cj.software.aspectj.own.mdc.service..*(..));
 	
 	private pointcut methodWithContract(Contract contract)
-	: execution( * *.*(.., Contract, ..))
-	&& args(contract);
+	: execution( * *.*(Contract, ..))
+	&& args(contract, ..);
 	
 	private pointcut toBeEmbedded(Contract contract) 
 	: hasLogger() && notPrivateMethod() && methodWithContract(contract);

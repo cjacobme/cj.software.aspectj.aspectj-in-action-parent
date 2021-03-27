@@ -23,6 +23,11 @@ public class BillingMachine
 		return result;
 	}
 
+	public void withMultipleArguments(Contract contract, String additional)
+	{
+		this.logger.info("with multiple arguments %s %s", contract.toString(), additional);
+	}
+
 	private void privateMethodIsNotReferenced(Contract contract)
 	{
 

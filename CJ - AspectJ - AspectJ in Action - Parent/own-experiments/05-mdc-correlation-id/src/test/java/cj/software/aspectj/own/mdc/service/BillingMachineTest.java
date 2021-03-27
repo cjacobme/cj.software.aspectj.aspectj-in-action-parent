@@ -52,4 +52,24 @@ public class BillingMachineTest
 		double returned = billingMachine.calculateTotalToBePayed(contract);
 		assertThat(returned).as("returned").isEqualTo(44790.1, within(0.01));
 	}
+
+	@Test
+	public void innerArgument()
+	{
+		Party customer = new Party(
+				UUID.fromString("56fa1042-6792-46e1-ba2a-a1294556f31e"),
+				"Customer 02",
+				LocalDate.of(2000, 5, 13));
+		Party serviceProvider = new Party(
+				UUID.fromString("bd6ab644-ccd2-463d-9927-03498c2551de"),
+				"Provider",
+				LocalDate.of(2004, 8, 1));
+		Contract contract = new Contract(
+				UUID.fromString("7434a8b5-28aa-4ba2-abbb-0d77a7de0814"),
+				serviceProvider,
+				customer,
+				"Program Billing");
+		BillingMachine machine = new BillingMachine();
+		machine.withMultipleArguments(contract, "qwer");
+	}
 }

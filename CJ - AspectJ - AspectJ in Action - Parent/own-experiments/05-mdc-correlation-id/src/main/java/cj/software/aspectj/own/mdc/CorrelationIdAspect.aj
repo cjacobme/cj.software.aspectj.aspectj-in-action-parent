@@ -8,7 +8,7 @@ import cj.software.aspectj.own.mdc.entity.Contract;
 public aspect CorrelationIdAspect
 {
 	private pointcut hasLogger() 
-	: get( Logger *.*);
+	: set( Logger *.*);
 	
 	private pointcut notPrivateMethod() 
 	: execution(!private * cj.software.aspectj.own.mdc.service..*(..));

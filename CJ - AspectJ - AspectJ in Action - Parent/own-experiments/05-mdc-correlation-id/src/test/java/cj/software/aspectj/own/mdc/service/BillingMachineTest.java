@@ -1,28 +1,22 @@
 package cj.software.aspectj.own.mdc.service;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.UUID;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.junit.Test;
 
 import cj.software.aspectj.own.mdc.entity.Contract;
 import cj.software.aspectj.own.mdc.entity.Party;
 import cj.software.aspectj.own.mdc.entity.Service;
 
-public class BillingMachineMain
+public class BillingMachineTest
 {
-	private Logger logger = LogManager.getFormatterLogger();
-
-	public static void main(String[] args)
-	{
-		BillingMachineMain machine = new BillingMachineMain();
-		machine.scenario1();
-	}
-
-	private void scenario1()
+	@Test
+	public void scenario1()
 	{
 		Party customer = new Party(
 				UUID.fromString("56fa1042-6792-46e1-ba2a-a1294556f32e"),
@@ -56,6 +50,6 @@ public class BillingMachineMain
 
 		BillingMachine billingMachine = new BillingMachine();
 		double returned = billingMachine.calculateTotalToBePayed(contract);
-		this.logger.info("result is %10.3f", returned);
+		assertThat(returned).as("returned").isEqualTo(44790.1, within(0.01));
 	}
 }

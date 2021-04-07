@@ -7,8 +7,14 @@ import cj.software.aspectj.own.mdc.entity.Contract;
 
 public aspect CorrelationIdAspect
 {
+	private interface HasLogger
+	{}
+	
+	declare parents:
+		hasfield(Logger *) implements HasLogger;
+	
 	private pointcut hasLogger() 
-	: set( Logger *.*);
+	: within(HasLogger+);
 	
 	private pointcut notPrivateMethod() 
 	: execution(!private * cj.software.aspectj.own.mdc.service..*(..));
@@ -17,7 +23,10 @@ public aspect CorrelationIdAspect
 	: execution( * *.*(Contract, ..))
 	&& args(contract, ..);
 	
-	Object around(Contract contract) : methodWithContract(contract) && notPrivateMethod()
+	Object around(Contract contract) 
+	: methodWithContract(contract) 
+	&& notPrivateMethod()
+	&& hasLogger()
 	{
 		String oldCorrelationId = MDC.get(Constants.CORRELATION_ID);
 		try

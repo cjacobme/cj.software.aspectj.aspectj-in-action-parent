@@ -76,6 +76,7 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<Xlint>ignore</Xlint>
+					<XhasMember>true</XhasMember>
 					<complianceLevel>${java.version}</complianceLevel>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<!--<verbose>true</verbose> -->

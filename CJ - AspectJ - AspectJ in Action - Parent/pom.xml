@@ -99,6 +99,7 @@
 		<module>ch05-static-crosscutting</module>
 		<module>ch06-aspects</module>
 		<module>ch07-at-aspectj</module>
+		<module>ch09-spring</module>
 	</modules>
 	<build>
 		<pluginManagement>

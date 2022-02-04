@@ -14,5 +14,6 @@
   	<module>cflow</module>
   	<module>04-camunda</module>
   	<module>05-mdc-correlation-id</module>
+  	<module>06-aspectj</module>
   </modules>
 </project>

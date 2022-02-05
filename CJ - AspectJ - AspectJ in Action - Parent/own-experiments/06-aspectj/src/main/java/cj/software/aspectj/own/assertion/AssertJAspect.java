@@ -1,7 +1,8 @@
 package cj.software.aspectj.own.assertion;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
@@ -25,19 +26,16 @@ public class AssertJAspect
 	{
 	}
 
-	@Around("assertionMethod() && !asMethod() && !extractingMethod()")
-	public Object logAssertion(ProceedingJoinPoint joinPoint) throws Throwable
+	@AfterReturning("assertionMethod() && !asMethod() && !extractingMethod()")
+	public void normalReturn(JoinPoint joinPoint)
 	{
-		try
-		{
-			Object result = joinPoint.proceed();
-			this.logService.succeed(joinPoint);
-			return result;
-		}
-		catch (Throwable throwable)
-		{
-			this.logService.fail(joinPoint, throwable);
-			throw throwable;
-		}
+		this.logService.succeed(joinPoint);
+	}
+
+	@AfterThrowing(pointcut = "assertionMethod() && !asMethod() && !extractingMethod()",
+			throwing = "throwable")
+	public void caughtThrowable(JoinPoint joinPoint, Throwable throwable)
+	{
+		this.logService.fail(joinPoint, throwable);
 	}
 }

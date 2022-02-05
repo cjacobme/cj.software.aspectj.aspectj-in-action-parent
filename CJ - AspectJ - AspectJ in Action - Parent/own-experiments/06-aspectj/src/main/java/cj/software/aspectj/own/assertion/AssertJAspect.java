@@ -1,9 +1,6 @@
 package cj.software.aspectj.own.assertion;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -11,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class AssertJAspect
 {
-	private Logger logger = LogManager.getFormatterLogger();
+	private LogService logService = new LogService();
 
 	@Pointcut("call(* org.assertj.core.api.*Assert.*(..))")
 	public void assertionMethod()
@@ -31,16 +28,15 @@ public class AssertJAspect
 	@Around("assertionMethod() && !asMethod() && !extractingMethod()")
 	public Object logAssertion(ProceedingJoinPoint joinPoint) throws Throwable
 	{
-		Signature signature = joinPoint.getSignature();
 		try
 		{
 			Object result = joinPoint.proceed();
-			this.logger.info("%s succeeded", signature);
+			this.logService.succeed(joinPoint);
 			return result;
 		}
 		catch (Throwable throwable)
 		{
-			this.logger.error("%s failed %s", signature, throwable.getMessage());
+			this.logService.fail(joinPoint, throwable);
 			throw throwable;
 		}
 	}

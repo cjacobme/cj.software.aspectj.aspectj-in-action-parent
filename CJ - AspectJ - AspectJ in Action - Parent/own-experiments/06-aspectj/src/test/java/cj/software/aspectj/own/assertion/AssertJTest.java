@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 import cj.software.aspectj.own.entity.Person;
@@ -40,5 +41,14 @@ public class AssertJTest
 					tuple("Karl Durchschnitt", LocalDate.of(1995, 10, 5)),
 					tuple("eins", LocalDate.of(1995, 10, 5)));
 		//@formatter:on
+	}
+
+	@Test
+	public void softAssertions()
+	{
+		SoftAssertions softy = new SoftAssertions();
+		softy.assertThat("Hello World").as("greeting").hasSize(11);
+		softy.assertThat(3 * 4).as("product").isEqualTo(12);
+		softy.assertAll();
 	}
 }

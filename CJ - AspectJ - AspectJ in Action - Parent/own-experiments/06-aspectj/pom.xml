@@ -2,17 +2,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>cj.software.aspectj</groupId>
 		<artifactId>own-experiments</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>06-assertions</artifactId>
 	<name>06 Own Experiments - Assertions</name>
 	<description>investigate how AssertJ, Hamcrest, and JUnit invocations can be cross-cut</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -36,6 +36,12 @@
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

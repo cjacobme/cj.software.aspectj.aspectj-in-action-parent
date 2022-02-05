@@ -38,7 +38,7 @@ public class AssertJTest
 			.extracting("name", "birthday")
 			.containsExactly(
 					tuple("Karl Durchschnitt", LocalDate.of(1995, 10, 5)),
-					tuple("ein", LocalDate.of(1995, 10, 5)));
+					tuple("eins", LocalDate.of(1995, 10, 5)));
 		//@formatter:on
 	}
 }

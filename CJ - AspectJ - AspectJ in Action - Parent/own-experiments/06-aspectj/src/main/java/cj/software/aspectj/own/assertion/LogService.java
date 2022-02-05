@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.WritableAssertionInfo;
 
 public class LogService
 {
@@ -12,12 +14,23 @@ public class LogService
 	void succeed(JoinPoint joinPoint)
 	{
 		Signature signature = joinPoint.getSignature();
-		this.logger.info("%s succeeded", signature);
+		Object target = joinPoint.getTarget();
+		if (target instanceof AbstractAssert)
+		{
+			AbstractAssert<?, ?> abstractAssert = (AbstractAssert<?, ?>) target;
+			WritableAssertionInfo info = abstractAssert.info;
+			String text = info.descriptionText();
+			this.logger.info("%s [%s] succeeded", signature, text);
+		}
+		else
+		{
+			this.logger.info("%s succeeded", signature);
+		}
 	}
 
 	void fail(JoinPoint joinPoint, Throwable throwable)
 	{
 		Signature signature = joinPoint.getSignature();
-		this.logger.error("%s failed %s", signature, throwable.getMessage());
+		this.logger.error("%s failed with %s", signature, throwable.getMessage());
 	}
 }

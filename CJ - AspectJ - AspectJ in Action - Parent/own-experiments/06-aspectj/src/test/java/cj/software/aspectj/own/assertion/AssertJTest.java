@@ -1,4 +1,4 @@
-package cj.software.aspectj.own.assertj;
+package cj.software.aspectj.own.assertion;
 
 import static org.assertj.core.api.Assertions.*;
 

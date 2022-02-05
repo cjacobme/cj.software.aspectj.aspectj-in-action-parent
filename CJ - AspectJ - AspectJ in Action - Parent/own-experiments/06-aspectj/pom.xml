@@ -9,9 +9,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>06-aspectj</artifactId>
-	<name>06 Own Experiments - AssertJ</name>
-	<description>investigate how AssertJ invocations can be cross-cut</description>
+	<artifactId>06-assertions</artifactId>
+	<name>06 Own Experiments - Assertions</name>
+	<description>investigate how AssertJ, Hamcrest, and JUnit invocations can be cross-cut</description>
 	
 	<dependencies>
 		<dependency>

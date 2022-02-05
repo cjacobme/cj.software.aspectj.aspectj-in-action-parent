@@ -11,39 +11,46 @@ public class HamcrestAspect
 {
 	private LogService logService = new LogService();
 
-	@Pointcut("call (* org.hamcrest.MatcherAssert.assertThat(..))")
-	public void hamcrestAssertion()
+	@Pointcut("call (* org.hamcrest.MatcherAssert.assertThat(String, Object, org.hamcrest.Matcher))")
+	public void matcherAssertWithReason()
 	{
 	}
 
-	@AfterReturning("hamcrestAssertion()")
-	public void normalExecution(JoinPoint joinPoint)
+	@Pointcut("call (* org.hamcrest.MatcherAssert.assertThat(Object, org.hamcrest.Matcher))")
+	public void matcherAssertWithoutReason()
+	{
+	}
+
+	@Pointcut("call (* org.hamcrest.MatcherAssert.assertThat(String, boolean))")
+	public void plain()
+	{
+	}
+
+	@AfterReturning("matcherAssertWithReason()")
+	public void normalWithReason(JoinPoint joinPoint)
 	{
 		Object[] args = joinPoint.getArgs();
-		String message;
-		if (args != null)
-		{
-			if (args.length == 3 && args[0] instanceof String)
-			{
-				message = (String) args[0];
-			}
-			else if (args.length == 2 && args[0] instanceof String && args[1] instanceof Boolean)
-			{
-				message = (String) args[0];
-			}
-			else
-			{
-				message = null;
-			}
-		}
-		else
-		{
-			message = null;
-		}
+		String message = (String) args[0];
 		this.logService.succeed(joinPoint.getSignature(), message);
 	}
 
-	@AfterThrowing(pointcut = "hamcrestAssertion()", throwing = "throwable")
+	@AfterReturning("matcherAssertWithoutReason()")
+	public void normalWithoutReason(JoinPoint joinPoint)
+	{
+		this.logService.succeed(joinPoint.getSignature(), null);
+	}
+
+	@AfterReturning("plain()")
+	public void normalPlain(JoinPoint joinPoint)
+	{
+		Object[] args = joinPoint.getArgs();
+		String message = (String) args[0];
+		this.logService.succeed(joinPoint.getSignature(), message);
+	}
+
+	@AfterThrowing(
+			pointcut = "matcherAssertWithReason() || matcherAssertWithoutReason() || plain()",
+			throwing = "throwable")
 	public void exceptionCaught(JoinPoint joinPoint, Throwable throwable)
 	{
 		this.logService.fail(joinPoint.getSignature(), throwable);

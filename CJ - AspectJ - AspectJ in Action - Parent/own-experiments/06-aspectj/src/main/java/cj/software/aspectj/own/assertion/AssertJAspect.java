@@ -23,7 +23,12 @@ public class AssertJAspect
 	{
 	}
 
-	@Around("assertionMethod() && !asMethod()")
+	@Pointcut("call(* org.assertj.core.api.*Assert.extracting(..))")
+	public void extractingMethod()
+	{
+	}
+
+	@Around("assertionMethod() && !asMethod() && !extractingMethod()")
 	public Object logAssertion(ProceedingJoinPoint joinPoint) throws Throwable
 	{
 		Signature signature = joinPoint.getSignature();

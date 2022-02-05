@@ -2,7 +2,14 @@ package cj.software.aspectj.own.assertion;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
+
+import cj.software.aspectj.own.entity.Person;
+import cj.software.aspectj.own.entity.PersonBuilder;
 
 public class AssertJTest
 {
@@ -18,5 +25,20 @@ public class AssertJTest
 	{
 		int number = 2;
 		assertThat(number).as("this will %s", "pass").isEqualByComparingTo(2);
+	}
+
+	@Test
+	public void extractValues()
+	{
+		List<Person> persons = Arrays.asList(
+				new PersonBuilder().build(),
+				new PersonBuilder().withName("eins").build());
+		//@formatter:off
+		assertThat(persons).as("persons")
+			.extracting("name", "birthday")
+			.containsExactly(
+					tuple("Karl Durchschnitt", LocalDate.of(1995, 10, 5)),
+					tuple("ein", LocalDate.of(1995, 10, 5)));
+		//@formatter:on
 	}
 }

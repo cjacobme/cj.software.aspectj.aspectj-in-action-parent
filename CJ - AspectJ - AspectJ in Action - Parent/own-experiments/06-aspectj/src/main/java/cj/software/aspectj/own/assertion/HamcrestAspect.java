@@ -19,12 +19,33 @@ public class HamcrestAspect
 	@AfterReturning("hamcrestAssertion()")
 	public void normalExecution(JoinPoint joinPoint)
 	{
-		this.logService.succeed(joinPoint);
+		Object[] args = joinPoint.getArgs();
+		String message;
+		if (args != null)
+		{
+			if (args.length == 3 && args[0] instanceof String)
+			{
+				message = (String) args[0];
+			}
+			else if (args.length == 2 && args[0] instanceof String && args[1] instanceof Boolean)
+			{
+				message = (String) args[0];
+			}
+			else
+			{
+				message = null;
+			}
+		}
+		else
+		{
+			message = null;
+		}
+		this.logService.succeed(joinPoint.getSignature(), message);
 	}
 
 	@AfterThrowing(pointcut = "hamcrestAssertion()", throwing = "throwable")
 	public void exceptionCaught(JoinPoint joinPoint, Throwable throwable)
 	{
-		this.logService.fail(joinPoint, throwable);
+		this.logService.fail(joinPoint.getSignature(), throwable);
 	}
 }

@@ -5,6 +5,8 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.WritableAssertionInfo;
 
 @Aspect
 public class AssertJAspect
@@ -29,13 +31,25 @@ public class AssertJAspect
 	@AfterReturning("assertionMethod() && !asMethod() && !extractingMethod()")
 	public void normalReturn(JoinPoint joinPoint)
 	{
-		this.logService.succeed(joinPoint);
+		Object target = joinPoint.getTarget();
+		String message;
+		if (target instanceof AbstractAssert)
+		{
+			AbstractAssert<?, ?> abstractAssert = (AbstractAssert<?, ?>) target;
+			WritableAssertionInfo info = abstractAssert.info;
+			message = info.descriptionText();
+		}
+		else
+		{
+			message = "";
+		}
+		this.logService.succeed(joinPoint.getSignature(), message);
 	}
 
 	@AfterThrowing(pointcut = "assertionMethod() && !asMethod() && !extractingMethod()",
 			throwing = "throwable")
 	public void caughtThrowable(JoinPoint joinPoint, Throwable throwable)
 	{
-		this.logService.fail(joinPoint, throwable);
+		this.logService.fail(joinPoint.getSignature(), throwable);
 	}
 }
